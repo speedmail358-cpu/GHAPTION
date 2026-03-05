@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -11,30 +11,24 @@
         --text-main: #1f2937;
         --text-muted: #6b7280;
         --border: rgba(255, 255, 255, 0.3);
-        
-        /* GLASS DEFAULTS */
         --glass-bg: rgba(255, 255, 255, 0.75);
         --glass-input-bg: rgba(255, 255, 255, 0.4);
         --glass-blur: 12px;
-        
         --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
         --radius: 12px;
     }
 
-    /* POP MODE (Ultra Transparency) */
     body.ultra-transparent {
         --glass-bg: rgba(255, 255, 255, 0.1);
         --glass-input-bg: rgba(255, 255, 255, 0.05);
         --border: rgba(255, 255, 255, 0.1);
     }
 
-    /* LIGHT TEXT MODE (For Dark Wallpapers) */
     body.text-light {
         --text-main: #f3f4f6;
         --text-muted: #d1d5db;
     }
     
-    /* DARK MODE BASE */
     body.dark-mode {
         --border: rgba(255, 255, 255, 0.1);
         --glass-bg: rgba(31, 41, 55, 0.8);
@@ -49,7 +43,6 @@
         --text-muted: #e5e7eb;
     }
 
-    /* WALLPAPER LAYER */
     #wallpaper-layer {
         position: fixed;
         top: 0; left: 0; width: 100%; height: 100%;
@@ -63,11 +56,9 @@
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
     
-    /* FOCUS STATES */
     *:focus-visible {
         outline: 2px solid var(--primary);
         outline-offset: 2px;
-        background-color: var(--glass-input-bg);
     }
 
     body {
@@ -80,146 +71,250 @@
         transition: color 0.3s ease;
     }
 
-    /* --- GLOBAL GLASS MIXIN --- */
-    .glass-card {
+    .container { 
+        max-width: 1200px; 
+        margin: 20px auto; 
+        padding: 25px; 
+        background: var(--glass-bg); 
+        backdrop-filter: blur(var(--glass-blur)); 
+        border: 1px solid var(--border); 
+        box-shadow: var(--shadow);
+        border-radius: var(--radius);
+    }
+
+    /* LOGIN PANEL - Inside UI */
+    .login-panel {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 20px;
+    }
+    .login-box {
+        width: 100%;
+        max-width: 380px;
+        padding: 35px;
         background: var(--glass-bg);
         backdrop-filter: blur(var(--glass-blur));
-        -webkit-backdrop-filter: blur(var(--glass-blur));
         border: 1px solid var(--border);
         border-radius: var(--radius);
         box-shadow: var(--shadow);
-        transition: background 0.3s;
+        text-align: center;
     }
+    .login-box h2 { color: var(--primary); margin-bottom: 5px; }
+    .login-box .subtitle { color: var(--text-muted); margin-bottom: 25px; font-size: 14px; }
 
-    /* AUTH CONTAINER */
-    #auth-container { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
-    .auth-card { width: 100%; max-width: 400px; padding: 40px; text-align: center; background: var(--glass-bg); backdrop-filter: blur(var(--glass-blur)); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); }
-    .auth-card h2 { margin-bottom: 10px; color: var(--primary); }
-
-    /* MAIN APP CONTAINER */
-    .container { max-width: 1200px; margin: 20px auto; padding: 25px; background: var(--glass-bg); backdrop-filter: blur(var(--glass-blur)); border: 1px solid var(--border); box-shadow: var(--shadow); }
-
-    /* COMPONENTS */
-    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid var(--border); flex-wrap: wrap; gap: 15px; }
-    .main-title { font-size: 22px; font-weight: 700; display: flex; align-items: center; gap: 10px; text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-    .status-dot { height: 10px; width: 10px; background-color: #ccc; border-radius: 50%; }
-    .status-dot.online { background-color: #10b981; box-shadow: 0 0 8px #10b981; }
-
-    .header-controls { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
-    
-    /* INPUTS - SEE THROUGH */
     input, select {
-        padding: 10px; border: 1px solid var(--border); border-radius: 6px; font-size: 14px; 
-        background: var(--glass-input-bg); /* Wallpaper shows through here */
+        width: 100%;
+        padding: 12px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        font-size: 14px;
+        background: var(--glass-input-bg);
         backdrop-filter: blur(5px);
-        -webkit-backdrop-filter: blur(5px);
-        color: var(--text-main); 
+        color: var(--text-main);
         transition: all 0.2s;
+        margin-bottom: 12px;
     }
-    input::placeholder { color: var(--text-muted); opacity: 0.7; }
-    input:focus, select:focus { background: rgba(255,255,255,0.5); border-color: var(--primary); box-shadow: 0 0 10px rgba(79, 70, 229, 0.2); }
+    input:focus, select:focus { 
+        background: rgba(255,255,255,0.5); 
+        border-color: var(--primary); 
+        box-shadow: 0 0 10px rgba(79, 70, 229, 0.2); 
+    }
+    input::placeholder { color: var(--text-muted); }
 
-    .btn-primary { background: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 6px rgba(79, 70, 229, 0.2); transition: all 0.2s; }
+    .btn-primary { 
+        background: var(--primary); 
+        color: white; 
+        border: none; 
+        padding: 12px 24px; 
+        border-radius: 8px; 
+        font-weight: 600; 
+        cursor: pointer; 
+        display: inline-flex; 
+        align-items: center; 
+        justify-content: center; 
+        gap: 8px; 
+        box-shadow: 0 4px 6px rgba(79, 70, 229, 0.2); 
+        transition: all 0.2s; 
+        width: 100%;
+    }
     .btn-primary:hover { background: var(--primary-hover); transform: translateY(-2px); }
 
-    .btn-tool { background: var(--glass-input-bg); border: 1px solid var(--border); color: var(--text-main); padding: 8px 12px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; gap: 5px; font-size: 13px; font-weight: 500; backdrop-filter: blur(4px); }
+    .btn-tool { 
+        background: var(--glass-input-bg); 
+        border: 1px solid var(--border); 
+        color: var(--text-main); 
+        padding: 8px 14px; 
+        border-radius: 6px; 
+        cursor: pointer; 
+        display: inline-flex; 
+        align-items: center; 
+        gap: 5px; 
+        font-size: 13px; 
+        font-weight: 500; 
+        transition: all 0.2s;
+    }
     .btn-tool:hover { background: rgba(255,255,255,0.3); }
-    
-    .btn-filter.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* HEADER */
+    .header { 
+        display: flex; 
+        justify-content: space-between; 
+        align-items: center; 
+        margin-bottom: 20px; 
+        padding-bottom: 15px; 
+        border-bottom: 1px solid var(--border); 
+        flex-wrap: wrap; 
+        gap: 15px; 
+    }
+    .main-title { 
+        font-size: 22px; 
+        font-weight: 700; 
+        display: flex; 
+        align-items: center; 
+        gap: 10px; 
+    }
+    .user-badge {
+        background: rgba(79, 70, 229, 0.1);
+        color: var(--primary);
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+    }
+    .header-controls { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
 
     /* STATS */
     .stats-row { display: flex; gap: 15px; margin-bottom: 20px; }
-    .stat-card { flex: 1; padding: 15px; border-radius: 8px; text-align: center; background: var(--glass-input-bg); border: 1px solid var(--border); backdrop-filter: blur(4px); }
-    .stat-card h4 { margin: 0 0 5px 0; font-size: 12px; color: var(--text-muted); text-transform: uppercase; }
-    .stat-card .value { font-size: 28px; font-weight: 700; color: var(--primary); text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    .stat-card { 
+        flex: 1; 
+        padding: 18px; 
+        border-radius: 10px; 
+        text-align: center; 
+        background: var(--glass-input-bg); 
+        border: 1px solid var(--border); 
+    }
+    .stat-card h4 { margin: 0 0 5px 0; font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+    .stat-card .value { font-size: 32px; font-weight: 700; color: var(--primary); }
     body.text-light .stat-card .value { color: #a5b4fc; }
 
-    /* TABLE - SEE THROUGH */
-    .table-container { overflow-x: auto; border-radius: 8px; border: 1px solid var(--border); position: relative; background: transparent; }
-    table { width: 100%; border-collapse: collapse; font-size: 14px; background: transparent; }
-    thead th { text-align: left; padding: 14px; background: var(--glass-input-bg); color: var(--text-muted); font-weight: 700; border-bottom: 1px solid var(--border); backdrop-filter: blur(5px); }
-    tbody td { padding: 12px; border-bottom: 1px solid var(--border); vertical-align: middle; background: transparent; }
+    /* TABLE */
+    .table-container { 
+        overflow-x: auto; 
+        border-radius: 10px; 
+        border: 1px solid var(--border); 
+        background: transparent; 
+    }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    thead th { 
+        text-align: left; 
+        padding: 14px; 
+        background: var(--glass-input-bg); 
+        color: var(--text-muted); 
+        font-weight: 700; 
+        border-bottom: 1px solid var(--border); 
+    }
+    tbody td { padding: 12px; border-bottom: 1px solid var(--border); vertical-align: middle; }
     tbody tr:hover { background: var(--glass-input-bg); }
 
-    .badge { padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; border: 1px solid rgba(255,255,255,0.2); }
-    .badge-full { background: rgba(209, 250, 229, 0.6); color: #065f46; }
-    .badge-half { background: rgba(255, 237, 213, 0.6); color: #9a3412; }
+    .badge { padding: 5px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+    .badge-full { background: rgba(209, 250, 229, 0.7); color: #065f46; }
+    .badge-half { background: rgba(255, 237, 213, 0.7); color: #9a3412; }
 
-    .action-btn { padding: 6px 12px; font-size: 11px; margin-right: 5px; border-radius: 4px; border: none; cursor: pointer; color: white; opacity: 0.9; }
-    .action-btn:hover { opacity: 1; transform: scale(1.05); }
+    .action-btn { 
+        padding: 6px 12px; 
+        font-size: 11px; 
+        margin-right: 5px; 
+        border-radius: 5px; 
+        border: none; 
+        cursor: pointer; 
+        color: white; 
+        transition: all 0.2s;
+    }
+    .action-btn:hover { transform: scale(1.05); }
     .btn-edit { background: #f59e0b; }
     .btn-del { background: #ef4444; }
 
     /* MODAL */
-    .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.4); backdrop-filter: blur(2px); align-items: center; justify-content: center; }
+    .modal { 
+        display: none; 
+        position: fixed; 
+        z-index: 2000; 
+        left: 0; top: 0; width: 100%; height: 100%; 
+        background-color: rgba(0,0,0,0.5); 
+        backdrop-filter: blur(3px); 
+        align-items: center; 
+        justify-content: center; 
+    }
     .modal.show { display: flex; }
-    .modal-content { width: 90%; max-width: 600px; border-radius: 12px; overflow: hidden; animation: slideIn 0.3s ease-out; background: var(--glass-bg); backdrop-filter: blur(20px); border: 1px solid var(--border); }
+    .modal-content { 
+        width: 90%; 
+        max-width: 550px; 
+        border-radius: 12px; 
+        overflow: hidden; 
+        animation: slideIn 0.3s ease-out; 
+        background: var(--glass-bg); 
+        backdrop-filter: blur(20px); 
+        border: 1px solid var(--border); 
+    }
     @keyframes slideIn { from { transform: translateY(-30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
     
-    .modal-header { padding: 15px 20px; background: rgba(79, 70, 229, 0.8); color: white; display: flex; justify-content: space-between; align-items: center; }
-    .close-modal { background: none; border: none; color: white; font-size: 22px; cursor: pointer; }
+    .modal-header { 
+        padding: 15px 20px; 
+        background: rgba(79, 70, 229, 0.85); 
+        color: white; 
+        display: flex; 
+        justify-content: space-between; 
+        align-items: center; 
+    }
+    .close-modal { background: none; border: none; color: white; font-size: 24px; cursor: pointer; }
     .modal-body { padding: 20px; }
     .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
     .form-group { display: flex; flex-direction: column; gap: 5px; }
     label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
-    .modal-footer { padding: 15px 20px; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; gap: 10px; background: transparent; }
+    .modal-footer { 
+        padding: 15px 20px; 
+        border-top: 1px solid var(--border); 
+        display: flex; 
+        justify-content: flex-end; 
+        gap: 10px; 
+    }
 
-    /* CUSTOMIZER WIDGET */
+    /* CUSTOMIZER */
     .customizer-fab {
         position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px;
         background: var(--primary); color: white; border-radius: 50%;
         display: flex; align-items: center; justify-content: center;
-        font-size: 24px; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 1500; transition: transform 0.2s;
+        font-size: 22px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 1500; transition: transform 0.2s;
     }
     .customizer-fab:hover { transform: scale(1.1) rotate(15deg); }
 
     .customizer-panel {
-        position: fixed; bottom: 80px; right: 20px; width: 300px; padding: 20px; z-index: 1500; display: none; animation: fadeInUp 0.3s;
+        position: fixed; bottom: 80px; right: 20px; width: 300px; padding: 20px; z-index: 1500; display: none;
         background: var(--glass-bg); backdrop-filter: blur(20px); border: 1px solid var(--border); border-radius: 12px;
     }
     .customizer-panel.show { display: block; }
-    
-    .customizer-section { margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 15px; }
+    .customizer-section { margin-bottom: 18px; padding-bottom: 15px; border-bottom: 1px solid var(--border); }
     .customizer-section:last-child { border-bottom: none; margin-bottom: 0; }
-    .customizer-title { font-size: 12px; font-weight: 700; color: var(--text-main); margin-bottom: 10px; text-transform: uppercase; display: flex; align-items: center; gap: 5px; }
+    .customizer-title { font-size: 12px; font-weight: 700; color: var(--text-main); margin-bottom: 12px; text-transform: uppercase; }
 
-    /* Switch Toggle */
-    .switch-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-    .switch { position: relative; display: inline-block; width: 50px; height: 26px; }
+    .switch-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+    .switch { position: relative; display: inline-block; width: 48px; height: 26px; }
     .switch input { opacity: 0; width: 0; height: 0; }
-    .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0,0,0,0.2); transition: .4s; border-radius: 34px; }
-    .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 4px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%; }
+    .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0,0,0,0.2); transition: .3s; border-radius: 26px; }
+    .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 4px; bottom: 4px; background-color: white; transition: .3s; border-radius: 50%; }
     input:checked + .slider { background-color: var(--primary); }
-    input:checked + .slider:before { transform: translateX(24px); }
+    input:checked + .slider:before { transform: translateX(22px); }
 
     .preset-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
-    .preset-box { width: 100%; height: 40px; border-radius: 6px; cursor: pointer; border: 2px solid transparent; transition: transform 0.1s; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    .preset-box { width: 100%; height: 38px; border-radius: 6px; cursor: pointer; border: 2px solid transparent; transition: transform 0.15s; }
     .preset-box:hover { transform: scale(1.1); }
 
-    /* LOADING SPINNER */
-    .loader { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border: 3px solid rgba(0,0,0,0.1); border-top: 3px solid var(--primary); border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; display: none; }
-    @keyframes spin { 100% { transform: translate(-50%, -50%) rotate(360deg); } }
-    @keyframes fadeInUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .error-text { color: #ef4444; font-size: 12px; margin-top: 8px; }
+    .success-text { color: #10b981; font-size: 12px; margin-top: 8px; }
 
-    /* Setup Banner */
-    .setup-banner {
-        background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-        border: 2px solid #f59e0b;
-        border-radius: 8px;
-        padding: 15px 20px;
-        margin-bottom: 20px;
-        text-align: center;
-    }
-    .setup-banner h3 { color: #92400e; margin-bottom: 8px; }
-    .setup-banner p { color: #78350f; font-size: 14px; }
-    .setup-banner code { 
-        background: rgba(255,255,255,0.5); 
-        padding: 2px 6px; 
-        border-radius: 4px; 
-        font-family: monospace;
-    }
-
-    /* MOBILE CARD VIEW */
+    /* Responsive */
     @media (max-width: 768px) {
         .container { margin: 10px; padding: 15px; }
         .stats-row { flex-direction: column; }
@@ -228,80 +323,73 @@
         table, thead, tbody, th, td, tr { display: block; }
         thead tr { position: absolute; top: -9999px; left: -9999px; }
         
-        tbody tr { border: 1px solid var(--border); margin-bottom: 10px; border-radius: 8px; padding: 10px; background: transparent; }
-        tbody td { border: none; position: relative; padding-left: 50%; min-height: 30px; display: flex; align-items: center; }
+        tbody tr { border: 1px solid var(--border); margin-bottom: 10px; border-radius: 8px; padding: 12px; }
+        tbody td { border: none; position: relative; padding-left: 50%; min-height: 28px; display: flex; align-items: center; }
         tbody td:last-child { justify-content: flex-end; padding-left: 0; padding-top: 10px; }
-        td:before { position: absolute; top: 10px; left: 10px; width: 45%; font-weight: 600; color: var(--text-muted); font-size: 11px; content: attr(data-label); }
+        td:before { position: absolute; top: 12px; left: 12px; width: 45%; font-weight: 600; color: var(--text-muted); font-size: 11px; content: attr(data-label); }
         
-        .customizer-panel { width: calc(100% - 20px); right: 10px; bottom: 80px; }
+        .customizer-panel { width: calc(100% - 20px); right: 10px; }
     }
 
     @media print {
         body { background: white; }
         #wallpaper-layer { display: none; }
-        .container, .auth-card, .modal-content { background: white; backdrop-filter: none; box-shadow: none; border: 1px solid #ddd; }
-        .customizer-fab, .customizer-panel { display: none !important; }
-        input, select, .table-container, .stat-card { background: white !important; color: black !important; border: 1px solid #ddd !important; }
-        .btn-tool, .header-controls { display: none !important; }
+        .container { background: white; box-shadow: none; border: 1px solid #ddd; }
+        .customizer-fab, .customizer-panel, .action-btn { display: none !important; }
+        input, select { background: white !important; color: black !important; border: 1px solid #ddd !important; }
+        .btn-tool, .header-controls button { display: none !important; }
     }
 </style>
 </head>
 <body>
 
-<!-- WALLPAPER LAYER -->
 <div id="wallpaper-layer"></div>
 
-<!-- AUTH CONTAINER -->
-<div id="auth-container">
-    <div class="auth-card">
-        <h2 id="authTitle">Login</h2>
-        <p id="authSubtitle" style="margin-bottom:20px; color:var(--text-muted);">Access your Leave Data</p>
+<!-- LOGIN PANEL -->
+<div id="loginPanel" class="login-panel">
+    <div class="login-box">
+        <h2>📅 Leave Management</h2>
+        <p class="subtitle">Enter your credentials to continue</p>
         
-        <input id="email" type="email" placeholder="Email Address">
-        <input id="password" type="password" placeholder="Password">
+        <input type="text" id="loginUsername" placeholder="Username (e.g., john_doe)" maxlength="30">
+        <input type="password" id="loginPin" placeholder="4-digit PIN" maxlength="4" pattern="[0-9]*" inputmode="numeric">
         
-        <button id="authBtn" class="btn-primary" style="width:100%; justify-content:center;" onclick="handleAuth()">Login</button>
-        <p class="switch-auth" onclick="toggleAuthMode()" style="cursor:pointer; margin-top:15px; color:var(--primary);">Don't have an account? Register</p>
-        <p id="auth-error" style="color:#ef4444; font-size:12px; margin-top:10px;"></p>
+        <p id="loginError" class="error-text" style="display:none;"></p>
         
-        <!-- Setup Notice -->
-        <div class="setup-banner" style="margin-top:20px;">
-            <h3>⚠️ Setup Required</h3>
-            <p>Replace Firebase config with your own credentials.<br>See instructions below.</p>
-        </div>
+        <button class="btn-primary" onclick="handleLogin()">
+            🔐 Enter
+        </button>
+        
+        <p style="margin-top: 18px; font-size: 12px; color: var(--text-muted);">
+            First time? Just enter a new username & PIN to create an account.<br>
+            Your data stays on this device only.
+        </p>
     </div>
 </div>
 
 <!-- MAIN APP -->
-<div id="app-container" class="container" style="display:none; opacity:0; transition:opacity 0.5s;">
+<div id="appContainer" class="container" style="display:none;">
     <div class="header">
-        <div class="header-left">
-            <div class="main-title">
-                📅 Leave Management 
-                <span title="Live Cloud Sync" class="status-dot" id="statusDot"></span>
-            </div>
+        <div class="main-title">
+            📅 Leave Management
+            <span class="user-badge" id="userBadge"></span>
         </div>
         
         <div class="header-controls">
-            <button class="btn-primary" onclick="openModal()">
-                <span>+ New Entry</span>
+            <button class="btn-primary" onclick="openModal()" style="width:auto; padding:10px 18px;">
+                + New Entry
             </button>
 
-            <!-- MONTH SELECTOR -->
-            <div style="display:flex; align-items:center; gap:5px;">
-                <label style="font-size:12px; color:var(--text-muted); white-space:nowrap;">View:</label>
-                <input type="month" id="monthPicker" onchange="loadDataByMonth()">
+            <div style="display:flex; align-items:center; gap:8px;">
+                <label style="font-size:12px; color:var(--text-muted);">Month:</label>
+                <input type="month" id="monthPicker" style="width:150px; margin-bottom:0;" onchange="renderTable()">
             </div>
 
-            <div class="search-box">
-                <input id="search" type="text" placeholder="Search employee..." oninput="renderTable()">
-            </div>
+            <input type="text" id="searchInput" placeholder="🔍 Search..." style="width:140px; margin-bottom:0;" oninput="renderTable()">
 
-            <div class="settings-group" style="display:flex; gap:5px;">
-                <button class="btn-tool" id="sortBtn" onclick="toggleSort()">Sort: New ↓</button>
-                <button class="btn-tool dark-mode-btn" onclick="toggleDarkMode()" title="Dark Mode">🌓</button>
-                <button class="btn-tool" onclick="handleLogout()" title="Logout" style="color:#ef4444; border-color:#ef4444;">🚪</button>
-            </div>
+            <button class="btn-tool" id="sortBtn" onclick="toggleSort()">Sort: New ↓</button>
+            <button class="btn-tool" onclick="toggleDarkMode()">🌓</button>
+            <button class="btn-tool" onclick="handleLogout()" style="color:#ef4444; border-color:#ef4444;">🚪 Logout</button>
         </div>
     </div>
 
@@ -315,7 +403,7 @@
             <h4>Full Days</h4>
             <div class="value" id="statFull">0</div>
         </div>
-        <div class="stat-card warning">
+        <div class="stat-card">
             <h4>Half Days</h4>
             <div class="value" id="statHalf">0</div>
         </div>
@@ -323,21 +411,20 @@
 
     <!-- FILTERS -->
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; flex-wrap:wrap; gap:10px;">
-        <div style="display:flex; gap:5px;">
-             <button class="btn-filter active" id="filterAll" onclick="setFilter('All')" style="border:none; padding:8px 12px; cursor:pointer; border-radius:6px;">All</button>
-             <button class="btn-filter" id="filterFull" onclick="setFilter('Full Day')" style="border:none; padding:8px 12px; cursor:pointer; border-radius:6px;">Full</button>
-             <button class="btn-filter" id="filterHalf" onclick="setFilter('Half Day')" style="border:none; padding:8px 12px; cursor:pointer; border-radius:6px;">Half</button>
+        <div style="display:flex; gap:6px;">
+            <button class="btn-tool" id="filterAll" onclick="setFilter('All')" style="background:var(--primary); color:white; border-color:var(--primary);">All</button>
+            <button class="btn-tool" id="filterFull" onclick="setFilter('Full Day')">Full</button>
+            <button class="btn-tool" id="filterHalf" onclick="setFilter('Half Day')">Half</button>
         </div>
-        <div style="display:flex; gap:5px;">
-            <button class="btn-tool" style="color: green; border-color: green;" onclick="downloadExcel()">📥 Export</button>
-            <button class="btn-tool" style="color: #2563eb; border-color: #2563eb;" onclick="window.print()">🖨️ Print</button>
+        <div style="display:flex; gap:6px;">
+            <button class="btn-tool" style="color:#16a34a; border-color:#16a34a;" onclick="downloadCSV()">📥 Export CSV</button>
+            <button class="btn-tool" style="color:#2563eb; border-color:#2563eb;" onclick="window.print()">🖨️ Print</button>
         </div>
     </div>
 
     <!-- TABLE -->
     <div class="table-container">
-        <div class="loader" id="loader"></div>
-        <table id="log">
+        <table>
             <thead>
                 <tr>
                     <th>#</th>
@@ -347,53 +434,38 @@
                     <th>From</th>
                     <th>To</th>
                     <th>Submitted</th>
-                    <th style="text-align: right;">Actions</th>
+                    <th style="text-align:right;">Actions</th>
                 </tr>
             </thead>
             <tbody id="tableBody">
-                <tr><td colspan="9" style="text-align:center; color:#999; padding:20px;">Select a month to view data.</td></tr>
+                <tr><td colspan="8" style="text-align:center; padding:30px; color:var(--text-muted);">No records yet. Click "+ New Entry" to add.</td></tr>
             </tbody>
         </table>
     </div>
 </div>
 
-<!-- CUSTOMIZER WIDGET -->
-<div class="customizer-fab" onclick="toggleCustomizer()" title="Customize Wallpaper">🎨</div>
+<!-- CUSTOMIZER -->
+<div class="customizer-fab" onclick="toggleCustomizer()" title="Customize">🎨</div>
 <div class="customizer-panel" id="customizerPanel">
-    
-    <!-- VISIBILITY CONTROLS -->
     <div class="customizer-section">
         <div class="customizer-title">👁️ Appearance</div>
-        
         <div class="switch-row">
-            <span style="font-size:13px; font-weight:500;">Pop Mode (Clear)</span>
-            <label class="switch">
-                <input type="checkbox" id="popModeToggle" onchange="toggleUltraTransparent()">
-                <span class="slider"></span>
-            </label>
+            <span>Pop Mode (Clear)</span>
+            <label class="switch"><input type="checkbox" id="popModeToggle" onchange="toggleUltraTransparent()"><span class="slider"></span></label>
         </div>
-        
         <div class="switch-row">
-            <span style="font-size:13px; font-weight:500;">Light Text</span>
-            <label class="switch">
-                <input type="checkbox" id="lightTextToggle" onchange="toggleLightText()">
-                <span class="slider"></span>
-            </label>
+            <span>Light Text (Dark BG)</span>
+            <label class="switch"><input type="checkbox" id="lightTextToggle" onchange="toggleLightText()"><span class="slider"></span></label>
         </div>
-        <p style="font-size:10px; color:var(--text-muted); margin-top:5px;">Enable 'Light Text' if using a dark wallpaper.</p>
     </div>
-
-    <!-- WALLPAPER CONTROLS -->
     <div class="customizer-section">
         <div class="customizer-title">🖼️ Wallpaper</div>
         <input type="file" id="bgFileInput" accept="image/*" style="display:none" onchange="handleBgFile(this)">
         <button class="btn-tool" style="width:100%; justify-content:center; margin-bottom:10px;" onclick="document.getElementById('bgFileInput').click()">📤 Upload Image</button>
-        
-        <div style="display:flex; gap:5px; margin-bottom:10px;">
-            <input id="bgUrlInput" type="text" placeholder="Paste Image URL..." style="flex:1;">
-            <button class="btn-primary" onclick="applyBgUrl()">Set</button>
+        <div style="display:flex; gap:6px; margin-bottom:10px;">
+            <input id="bgUrlInput" type="text" placeholder="Image URL..." style="flex:1; margin-bottom:0;">
+            <button class="btn-tool" onclick="applyBgUrl()">Set</button>
         </div>
-
         <div class="preset-grid">
             <div class="preset-box" style="background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);" onclick="setPreset('linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)')"></div>
             <div class="preset-box" style="background: linear-gradient(to right, #ffecd2 0%, #fcb69f 100%);" onclick="setPreset('linear-gradient(to right, #ffecd2 0%, #fcb69f 100%)')"></div>
@@ -401,529 +473,514 @@
             <div class="preset-box" style="background: linear-gradient(to top, #09203f 0%, #537895 100%);" onclick="setPreset('linear-gradient(to top, #09203f 0%, #537895 100%)')"></div>
         </div>
     </div>
-    
-    <button class="btn-tool" style="width:100%; justify-content:center; color:#ef4444; border-color:#ef4444;" onclick="resetBg()">Reset to Default</button>
+    <button class="btn-tool" style="width:100%; justify-content:center; color:#ef4444; border-color:#ef4444;" onclick="resetBg()">Reset Background</button>
 </div>
 
 <!-- MODAL -->
 <div id="entryModal" class="modal">
     <div class="modal-content">
         <div class="modal-header">
-            <h3 class="modal-title" id="modalTitle">Add New Leave Record</h3>
+            <h3 id="modalTitle">Add New Entry</h3>
             <button class="close-modal" onclick="closeModal()">&times;</button>
         </div>
         <div class="modal-body">
             <div class="form-grid">
                 <div class="form-group">
-                    <label>Employee Name</label>
-                    <input id="name" type="text" placeholder="Employee Name">
+                    <label>Employee Name *</label>
+                    <input type="text" id="entryName" placeholder="Name">
                 </div>
                 <div class="form-group">
-                    <label>Section</label>
-                    <input id="section" type="text" placeholder="Department">
+                    <label>Section / Dept</label>
+                    <input type="text" id="entrySection" placeholder="Department">
                 </div>
                 <div class="form-group">
                     <label>Leave Type</label>
-                    <select id="type">
+                    <select id="entryType">
                         <option value="Full Day">Full Day</option>
                         <option value="Half Day">Half Day</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label>Date Submitted</label>
-                    <input id="submitted" type="text" class="smart-date" placeholder="DD-MM-YYYY" maxlength="10" oninput="formatDate(this)">
+                    <input type="text" id="entrySubmitted" placeholder="DD-MM-YYYY" maxlength="10" oninput="autoFormatDate(this)">
                 </div>
                 <div class="form-group">
-                    <label>From Date</label>
-                    <input id="from" type="text" class="smart-date" placeholder="DD-MM-YYYY" maxlength="10" oninput="formatDate(this, 'to')">
+                    <label>From Date *</label>
+                    <input type="text" id="entryFrom" placeholder="DD-MM-YYYY" maxlength="10" oninput="autoFormatDate(this)">
                 </div>
                 <div class="form-group">
-                    <label>To Date</label>
-                    <input id="to" type="text" class="smart-date" placeholder="DD-MM-YYYY" maxlength="10" oninput="formatDate(this)">
+                    <label>To Date *</label>
+                    <input type="text" id="entryTo" placeholder="DD-MM-YYYY" maxlength="10" oninput="autoFormatDate(this)">
                 </div>
             </div>
         </div>
         <div class="modal-footer">
-            <button class="btn-tool" onclick="closeModal()" style="border: 1px solid #ef4444; color: #ef4444;">Cancel</button>
-            <button class="btn-primary" onclick="saveData()">
-                <span id="saveText">💾 Save Record</span>
+            <button class="btn-tool" onclick="closeModal()">Cancel</button>
+            <button class="btn-primary" onclick="saveEntry()" style="width:auto;">
+                <span id="saveBtnText">💾 Save</span>
             </button>
         </div>
     </div>
 </div>
 
-<div id="toast" style="visibility:hidden; min-width:250px; background:#333; color:#fff; text-align:center; border-radius:8px; padding:12px; position:fixed; z-index:3000; bottom:30px; left:50%; transform:translateX(-50%);">Operation Successful</div>
-
-<!-- Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+<!-- TOAST -->
+<div id="toast" style="visibility:hidden; position:fixed; bottom:30px; left:50%; transform:translateX(-50%); background:#333; color:#fff; padding:12px 24px; border-radius:8px; z-index:9999; font-size:14px;"></div>
 
 <script>
-    /*
-    ================================================================================
-    🔥 FIREBASE SETUP INSTRUCTIONS
-    ================================================================================
-    
-    1. Go to https://console.firebase.google.com/
-    2. Click "Create a project" or use an existing one
-    3. Enable the following services:
-       - Authentication: Email/Password sign-in method
-       - Realtime Database: Create database (start in test mode or set rules)
-    
-    4. Go to Project Settings > General > Your apps
-    5. Click the web icon (</>) to register a web app
-    6. Copy the firebaseConfig object values below
-    
-    7. (Optional) Set Realtime Database Rules for better security:
-       {
-         "rules": {
-           "leave_records": {
-             ".read": "auth != null",
-             ".write": "auth != null"
-           }
-         }
-       }
-    
-    ================================================================================
-    */
+// ==================== STATE ====================
+let currentUser = null;
+let records = [];
+let editingId = null;
+let isDescending = true;
+let activeFilter = 'All';
 
-    // ========================================
-    // 🔧 REPLACE WITH YOUR FIREBASE CONFIG
-    // ========================================
-    const firebaseConfig = {
-        apiKey: "YOUR_API_KEY_HERE",
-        authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-        databaseURL: "https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com",
-        projectId: "YOUR_PROJECT_ID",
-        storageBucket: "YOUR_PROJECT_ID.appspot.com",
-        messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-        appId: "YOUR_APP_ID"
-    };
-    // ========================================
-
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-    const dbRef = firebase.database().ref('leave_records');
-
-    // --- GLOBAL STATE ---
-    let allRecords = {}; 
-    let currentEditKey = null;
-    let isDescending = true; 
-    let lastDeletedRecord = null;
-    let isRegisterMode = false;
-    let activeTypeFilter = "All";
-    let currentListener = null; 
-
-    // --- INITIALIZATION ---
-    
-    // 1. Load Settings Immediately
+// ==================== INIT ====================
+document.addEventListener('DOMContentLoaded', () => {
     loadSettings();
+    checkSession();
+});
 
-    // 2. Auth State Observer
-    auth.onAuthStateChanged((user) => {
-        if (user) {
-            document.getElementById('auth-container').style.display = 'none';
-            const app = document.getElementById('app-container');
-            app.style.display = 'block';
-            setTimeout(() => app.style.opacity = 1, 100);
-            document.getElementById('statusDot').classList.add('online');
-            initApp();
-        } else {
-            document.getElementById('auth-container').style.display = 'flex';
-            const app = document.getElementById('app-container');
-            app.style.opacity = 0;
-            setTimeout(() => app.style.display = 'none', 500);
-        }
-    });
+function checkSession() {
+    const session = localStorage.getItem('lms_session');
+    if (session) {
+        currentUser = JSON.parse(session);
+        showApp();
+    }
+}
 
-    function initApp() {
-        // Set default month
-        const now = new Date();
-        const y = now.getFullYear();
-        const m = String(now.getMonth() + 1).padStart(2, '0');
-        document.getElementById("monthPicker").value = `${y}-${m}`;
-        
-        // Sticky Date
-        if(localStorage.getItem('lastSubmitDate')) {
-            document.getElementById("submitted").value = localStorage.getItem('lastSubmitDate');
-        } else {
-            document.getElementById("submitted").value = formatDateInput(now); 
-        }
+// ==================== LOGIN / LOGOUT ====================
+function handleLogin() {
+    const username = document.getElementById('loginUsername').value.trim().toLowerCase();
+    const pin = document.getElementById('loginPin').value.trim();
+    const errorEl = document.getElementById('loginError');
 
-        loadDataByMonth();
+    if (!username || username.length < 3) {
+        errorEl.textContent = 'Username must be at least 3 characters.';
+        errorEl.style.display = 'block';
+        return;
+    }
+    if (!/^[a-z0-9_]+$/.test(username)) {
+        errorEl.textContent = 'Username can only have letters, numbers, and underscore.';
+        errorEl.style.display = 'block';
+        return;
+    }
+    if (!pin || pin.length !== 4 || !/^\d{4}$/.test(pin)) {
+        errorEl.textContent = 'PIN must be exactly 4 digits.';
+        errorEl.style.display = 'block';
+        return;
     }
 
-    // --- CUSTOMIZATION LOGIC ---
-    function loadSettings() {
-        // Load Wallpaper
-        const savedBg = localStorage.getItem('customBg');
-        if(savedBg) applyBgStyle(savedBg);
-
-        // Load Toggles
-        if(localStorage.getItem('popMode') === 'true') {
-            document.body.classList.add('ultra-transparent');
-            document.getElementById('popModeToggle').checked = true;
-        }
-        
-        if(localStorage.getItem('lightTextMode') === 'true') {
-            document.body.classList.add('text-light');
-            document.getElementById('lightTextToggle').checked = true;
-        }
-        
-        if(localStorage.getItem('darkMode') === 'true') {
-            document.body.classList.add('dark-mode');
-        }
-    }
-
-    function toggleCustomizer() {
-        document.getElementById('customizerPanel').classList.toggle('show');
-    }
-
-    function toggleUltraTransparent() {
-        const isChecked = document.getElementById('popModeToggle').checked;
-        document.body.classList.toggle('ultra-transparent', isChecked);
-        localStorage.setItem('popMode', isChecked);
-    }
-
-    function toggleLightText() {
-        const isChecked = document.getElementById('lightTextToggle').checked;
-        document.body.classList.toggle('text-light', isChecked);
-        localStorage.setItem('lightTextMode', isChecked);
-    }
-
-    function applyBgStyle(style) {
-        const layer = document.getElementById('wallpaper-layer');
-        if(style.startsWith('http') || style.startsWith('data:image')) {
-            layer.style.backgroundImage = `url('${style}')`;
-            layer.style.background = `url('${style}') center/cover no-repeat`;
-        } else {
-            layer.style.background = style;
-            layer.style.backgroundImage = 'none';
-        }
-    }
-
-    function handleBgFile(input) {
-        const file = input.files[0];
-        if (!file) return;
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            const base64 = e.target.result;
-            localStorage.setItem('customBg', base64);
-            applyBgStyle(base64);
-            toggleCustomizer(); 
-        };
-        reader.readAsDataURL(file);
-    }
-
-    function applyBgUrl() {
-        const url = document.getElementById('bgUrlInput').value;
-        if(url) {
-            localStorage.setItem('customBg', url);
-            applyBgStyle(url);
-            toggleCustomizer();
-        }
-    }
-
-    function setPreset(gradient) {
-        localStorage.setItem('customBg', gradient);
-        applyBgStyle(gradient);
-    }
-
-    function resetBg() {
-        localStorage.removeItem('customBg');
-        document.getElementById('wallpaper-layer').style.background = '#f3f4f6';
-        document.getElementById('wallpaper-layer').style.backgroundImage = 'none';
-        toggleCustomizer();
-    }
-
-    // --- DATA LOGIC ---
-    function loadDataByMonth() {
-        if(currentListener) dbRef.off(); 
-        document.getElementById('loader').style.display = 'block';
-        
-        const selectedMonth = document.getElementById("monthPicker").value;
-        if (!selectedMonth) { return; }
-
-        currentListener = dbRef.orderByChild('yearMonth').equalTo(selectedMonth).on('value', (snapshot) => {
-            allRecords = snapshot.val() ? snapshot.val() : {};
-            renderTable();
-            document.getElementById('loader').style.display = 'none';
-        });
-    }
-
-    function setFilter(type) {
-        activeTypeFilter = type;
-        document.querySelectorAll('.btn-filter').forEach(btn => btn.classList.remove('active'));
-        if(type === 'All') document.getElementById('filterAll').classList.add('active');
-        if(type === 'Full Day') document.getElementById('filterFull').classList.add('active');
-        if(type === 'Half Day') document.getElementById('filterHalf').classList.add('active');
-        renderTable();
-    }
-
-    function renderTable() {
-        let search = document.getElementById("search").value.toLowerCase();
-        let tbody = document.getElementById("tableBody");
-        tbody.innerHTML = "";
-        
-        let keys = Object.keys(allRecords);
-        
-        // Stats
-        let totalFull = 0, totalHalf = 0;
-        keys.forEach(k => {
-            if(allRecords[k].type === 'Full Day') totalFull++;
-            else totalHalf++;
-        });
-        document.getElementById('statTotal').innerText = keys.length;
-        document.getElementById('statFull').innerText = totalFull;
-        document.getElementById('statHalf').innerText = totalHalf;
-
-        if (keys.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="9" style="text-align:center; color:var(--text-muted); padding:40px;">No records found for this month.</td></tr>`;
-            return;
-        }
-
-        let count = 0;
-        let recordsArray = keys.map(key => { return { key: key, ...allRecords[key] }; });
-        
-        if (isDescending) recordsArray.reverse();
-
-        recordsArray.forEach(item => {
-            let r = item; 
-            let key = item.key;
-
-            if (activeTypeFilter !== 'All' && r.type !== activeTypeFilter) return;
-            if (!r.name.toLowerCase().includes(search)) return;
-
-            let row = tbody.insertRow(-1);
-            let badgeClass = r.type === "Full Day" ? "badge-full" : "badge-half";
-            const safeName = escapeHtml(r.name);
-            const safeSection = escapeHtml(r.section || '-');
-            
-            row.innerHTML = `
-                <td><strong>${count + 1}</strong></td>
-                <td data-label="Name"><strong>${safeName}</strong></td>
-                <td data-label="Section">${safeSection}</td>
-                <td data-label="Type"><span class="badge ${badgeClass}">${r.type}</span></td>
-                <td data-label="From">${formatDateDisplay(r.from)}</td>
-                <td data-label="To">${formatDateDisplay(r.to)}</td>
-                <td data-label="Submitted">${formatDateDisplay(r.submitted)}</td>
-                <td style="text-align: right;">
-                    <button class="action-btn btn-edit" onclick="editData('${key}')">Edit</button>
-                    <button class="action-btn btn-del" onclick="deleteData('${key}')">Del</button>
-                </td>
-            `;
-            count++;
-        });
-    }
-
-    function escapeHtml(text) {
-        if (!text) return text;
-        return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
-    }
-
-    function editData(key) {
-        let r = allRecords[key];
-        document.getElementById("name").value = r.name;
-        document.getElementById("section").value = r.section;
-        document.getElementById("type").value = r.type;
-        document.getElementById("from").value = reverseParseDate(r.from);
-        document.getElementById("to").value = reverseParseDate(r.to);
-        document.getElementById("submitted").value = reverseParseDate(r.submitted);
-        currentEditKey = key;
-        openModal(true); 
-    }
-
-    function deleteData(key) {
-        if(!confirm("Delete this record?")) return;
-        lastDeletedRecord = allRecords[key];
-        dbRef.child(key).remove();
-        showToast("Deleted.");
-    }
-
-    // --- MODAL & UI ---
-    function openModal(isEdit = false) {
-        const modal = document.getElementById('entryModal');
-        const title = document.getElementById('modalTitle');
-        const saveText = document.getElementById('saveText');
-        
-        modal.classList.add('show');
-        
-        if(!isEdit) {
-            title.innerText = "Add New Leave Record";
-            saveText.innerText = "💾 Save Record";
-            clearForm();
-            if(localStorage.getItem('lastSubmitDate')) {
-                 document.getElementById("submitted").value = localStorage.getItem('lastSubmitDate');
-            }
-        } else {
-            title.innerText = "Edit Leave Record";
-            saveText.innerText = "🔄 Update Record";
-        }
-        
-        setTimeout(() => document.getElementById("name").focus(), 100);
-    }
-
-    function closeModal() {
-        document.getElementById('entryModal').classList.remove('show');
-        currentEditKey = null;
-    }
-    window.onclick = function(event) {
-        if (event.target == document.getElementById('entryModal')) closeModal();
-    }
-    function toggleDarkMode() {
-        document.body.classList.toggle('dark-mode');
-        localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
-    }
-    function toggleSort() {
-        isDescending = !isDescending;
-        document.getElementById('sortBtn').innerText = isDescending ? 'Sort: New ↓' : 'Sort: Old ↑';
-        renderTable();
-    }
-
-    function saveData() {
-        let name = document.getElementById("name").value.trim();
-        let section = document.getElementById("section").value.trim();
-        let type = document.getElementById("type").value;
-        let from = document.getElementById("from").value;
-        let to = document.getElementById("to").value;
-        let submitted = document.getElementById("submitted").value;
-
-        if (!name || !from || !to || !submitted) {
-            showToast("Please fill all required fields.");
-            return;
-        }
-
-        let fromISO = parseCustomDate(from);
-        let toISO = parseCustomDate(to);
-        let submittedISO = parseCustomDate(submitted);
-
-        if(!fromISO || !toISO || !submittedISO) {
-            showToast("Invalid Date Format. Use DD-MM-YYYY.");
-            return;
-        }
-
-        if (new Date(fromISO) > new Date(toISO)) {
-            showToast("'From' date cannot be after 'To' date.");
-            return;
-        }
-
-        localStorage.setItem('lastSubmitDate', submitted);
-
-        let yearMonth = fromISO.slice(0, 7); 
-        let record = { name, section, type, from: fromISO, to: toISO, submitted: submittedISO, timestamp: Date.now(), yearMonth };
-
-        if (currentEditKey) {
-            dbRef.child(currentEditKey).update(record);
-            showToast("Updated Successfully!");
-        } else {
-            dbRef.push(record);
-            showToast("Saved to Cloud!");
-        }
-        closeModal();
-    }
-
-    function downloadExcel() {
-        if(Object.keys(allRecords).length === 0) { showToast("No data to export."); return; }
-        let csvContent = "data:text/csv;charset=utf-8,";
-        csvContent += "S.No,Name,Section,Type,From,To,Date Submitted\n";
-        let recordsArray = Object.values(allRecords);
-        if(isDescending) recordsArray.reverse();
-        recordsArray.forEach((r, index) => {
-            let row = `"${index + 1}","${r.name}","${r.section}","${r.type}","${r.from}","${r.to}","${r.submitted}"`;
-            csvContent += row + "\n";
-        });
-        let encodedUri = encodeURI(csvContent);
-        let link = document.createElement("a");
-        link.setAttribute("href", encodedUri);
-        link.setAttribute("download", `Leave_Report_${new Date().toISOString().slice(0,10)}.csv`);
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    }
-
-    // --- HELPERS ---
-    function formatDate(input, nextFieldId) {
-        let value = input.value; let raw = value.replace(/\D/g, '');
-        let today = new Date(); let defaultMonth = String(today.getMonth() + 1).padStart(2, '0');
-        let defaultYear = String(today.getFullYear());
-        if (raw.length === 2 && value.length <= 2) { input.value = raw + "-" + defaultMonth + "-" + defaultYear; return; }
-        if (value.length > 10) { input.value = value.slice(0, 10); return; }
-        if (raw.length > 2) {
-             let d = raw.slice(0, 2); let m = raw.slice(2, 4); let y = raw.slice(4, 8);
-             let formatted = d; if (m) formatted += "-" + m; if (y) formatted += "-" + y; input.value = formatted;
-        }
-    }
-    function parseCustomDate(dateStr) {
-        if (!dateStr || dateStr.length < 8) return null;
-        let parts = dateStr.split('-');
-        if (parts.length !== 3) return null;
-        if(isNaN(parts[0]) || isNaN(parts[1]) || isNaN(parts[2])) return null;
-        return `${parts[2]}-${parts[1]}-${parts[0]}`;
-    }
-    function reverseParseDate(isoStr) {
-        if(!isoStr) return "";
-        let parts = isoStr.split('-'); return `${parts[2]}-${parts[1]}-${parts[0]}`;
-    }
-    function formatDateInput(date) {
-        const d = String(date.getDate()).padStart(2, '0');
-        const m = String(date.getMonth() + 1).padStart(2, '0');
-        const y = date.getFullYear();
-        return `${d}-${m}-${y}`;
-    }
-    function formatDateDisplay(dateString) {
-        if(!dateString) return "";
-        let options = { year: 'numeric', month: 'short', day: 'numeric' };
-        return new Date(dateString).toLocaleDateString(undefined, options);
-    }
-    function showToast(message) {
-        let x = document.getElementById("toast"); x.textContent = message; x.className = "show"; x.style.visibility = "visible";
-        setTimeout(function(){ x.style.visibility = "hidden"; }, 3000);
-    }
-    function handleAuth() {
-        const email = document.getElementById("email").value;
-        const pass = document.getElementById("password").value;
-        const errorEl = document.getElementById('auth-error');
-        if(!email || !pass) { errorEl.innerText = "Please enter email and password."; return; }
-        if(isRegisterMode) {
-            auth.createUserWithEmailAndPassword(email, pass).catch(e => errorEl.innerText = e.message);
-        } else {
-            auth.signInWithEmailAndPassword(email, pass).catch(e => errorEl.innerText = e.message);
-        }
-    }
-    function toggleAuthMode() {
-        isRegisterMode = !isRegisterMode;
-        const title = document.getElementById('authTitle');
-        const btn = document.getElementById('authBtn');
-        const subtitle = document.getElementById('authSubtitle');
-        const toggle = document.querySelector('.switch-auth');
-        if(isRegisterMode) {
-            title.innerText = "Register"; btn.innerText = "Create Account"; subtitle.innerText = "Setup your access"; toggle.innerText = "Already have an account? Login";
-        } else {
-            title.innerText = "Login"; btn.innerText = "Login"; subtitle.innerText = "Access your Leave Data"; toggle.innerText = "Don't have an account? Register";
-        }
-        document.getElementById('auth-error').innerText = "";
-    }
-    function handleLogout() { if(confirm("Logout?")) auth.signOut(); }
-
-    // KEYBOARD SHORTCUT
-    document.addEventListener('keydown', function(e) {
-        const tag = document.activeElement.tagName;
-        if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
-        if ((e.ctrlKey || e.metaKey) && e.key === 'n') {
-            e.preventDefault();
-            openModal();
-        }
-    });
+    // Check existing user
+    const users = JSON.parse(localStorage.getItem('lms_users') || '{}');
     
-    function clearForm() {
-        document.getElementById("name").value = ""; 
-        document.getElementById("section").value = ""; 
-        document.getElementById("type").value = "Full Day";
-        document.getElementById("from").value = ""; 
-        document.getElementById("to").value = "";
+    if (users[username]) {
+        // Existing user - verify PIN
+        if (users[username].pin !== pin) {
+            errorEl.textContent = 'Incorrect PIN. Try again.';
+            errorEl.style.display = 'block';
+            return;
+        }
+    } else {
+        // New user - create account
+        users[username] = { pin: pin, createdAt: Date.now() };
+        localStorage.setItem('lms_users', JSON.stringify(users));
     }
+
+    // Login success
+    currentUser = { username: username };
+    localStorage.setItem('lms_session', JSON.stringify(currentUser));
+    errorEl.style.display = 'none';
+    showApp();
+}
+
+function handleLogout() {
+    if (confirm('Logout? Your data will remain saved.')) {
+        localStorage.removeItem('lms_session');
+        currentUser = null;
+        document.getElementById('appContainer').style.display = 'none';
+        document.getElementById('loginPanel').style.display = 'flex';
+        document.getElementById('loginUsername').value = '';
+        document.getElementById('loginPin').value = '';
+    }
+}
+
+function showApp() {
+    document.getElementById('loginPanel').style.display = 'none';
+    document.getElementById('appContainer').style.display = 'block';
+    document.getElementById('userBadge').textContent = '👤 ' + currentUser.username;
+    
+    // Set default month
+    const now = new Date();
+    document.getElementById('monthPicker').value = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
+    document.getElementById('entrySubmitted').value = formatDateInput(now);
+    
+    // Load last submitted date
+    const lastDate = localStorage.getItem(`lms_lastDate_${currentUser.username}`);
+    if (lastDate) document.getElementById('entrySubmitted').value = lastDate;
+    
+    loadRecords();
+    renderTable();
+}
+
+// ==================== DATA STORAGE ====================
+function loadRecords() {
+    const key = `lms_records_${currentUser.username}`;
+    records = JSON.parse(localStorage.getItem(key) || '[]');
+}
+
+function saveRecords() {
+    const key = `lms_records_${currentUser.username}`;
+    localStorage.setItem(key, JSON.stringify(records));
+}
+
+// ==================== CRUD ====================
+function openModal(isEdit = false) {
+    const modal = document.getElementById('entryModal');
+    const title = document.getElementById('modalTitle');
+    const btnText = document.getElementById('saveBtnText');
+    
+    if (!isEdit) {
+        document.getElementById('entryName').value = '';
+        document.getElementById('entrySection').value = '';
+        document.getElementById('entryType').value = 'Full Day';
+        document.getElementById('entryFrom').value = '';
+        document.getElementById('entryTo').value = '';
+        
+        const lastDate = localStorage.getItem(`lms_lastDate_${currentUser.username}`);
+        document.getElementById('entrySubmitted').value = lastDate || formatDateInput(new Date());
+        
+        title.textContent = 'Add New Entry';
+        btnText.textContent = '💾 Save';
+        editingId = null;
+    } else {
+        title.textContent = 'Edit Entry';
+        btnText.textContent = '🔄 Update';
+    }
+    
+    modal.classList.add('show');
+    setTimeout(() => document.getElementById('entryName').focus(), 100);
+}
+
+function closeModal() {
+    document.getElementById('entryModal').classList.remove('show');
+    editingId = null;
+}
+
+function saveEntry() {
+    const name = document.getElementById('entryName').value.trim();
+    const section = document.getElementById('entrySection').value.trim();
+    const type = document.getElementById('entryType').value;
+    const from = document.getElementById('entryFrom').value.trim();
+    const to = document.getElementById('entryTo').value.trim();
+    const submitted = document.getElementById('entrySubmitted').value.trim();
+
+    if (!name || !from || !to) {
+        showToast('Please fill Name, From Date, and To Date.');
+        return;
+    }
+
+    const fromISO = parseDate(from);
+    const toISO = parseDate(to);
+    const submittedISO = parseDate(submitted);
+
+    if (!fromISO || !toISO) {
+        showToast('Invalid date format. Use DD-MM-YYYY.');
+        return;
+    }
+
+    if (new Date(fromISO) > new Date(toISO)) {
+        showToast('From date cannot be after To date.');
+        return;
+    }
+
+    // Save last submitted date
+    if (submitted) {
+        localStorage.setItem(`lms_lastDate_${currentUser.username}`, submitted);
+    }
+
+    const entry = {
+        id: editingId || Date.now().toString(),
+        name,
+        section,
+        type,
+        from: fromISO,
+        to: toISO,
+        submitted: submittedISO || new Date().toISOString().split('T')[0],
+        createdAt: editingId ? records.find(r => r.id === editingId)?.createdAt : Date.now()
+    };
+
+    if (editingId) {
+        const idx = records.findIndex(r => r.id === editingId);
+        if (idx !== -1) records[idx] = entry;
+        showToast('Updated successfully!');
+    } else {
+        records.push(entry);
+        showToast('Entry saved!');
+    }
+
+    saveRecords();
+    closeModal();
+    renderTable();
+}
+
+function editEntry(id) {
+    const entry = records.find(r => r.id === id);
+    if (!entry) return;
+
+    document.getElementById('entryName').value = entry.name;
+    document.getElementById('entrySection').value = entry.section || '';
+    document.getElementById('entryType').value = entry.type;
+    document.getElementById('entryFrom').value = reverseDate(entry.from);
+    document.getElementById('entryTo').value = reverseDate(entry.to);
+    document.getElementById('entrySubmitted').value = reverseDate(entry.submitted);
+    
+    editingId = id;
+    openModal(true);
+}
+
+function deleteEntry(id) {
+    if (!confirm('Delete this entry?')) return;
+    records = records.filter(r => r.id !== id);
+    saveRecords();
+    renderTable();
+    showToast('Deleted.');
+}
+
+// ==================== RENDER ====================
+function renderTable() {
+    const tbody = document.getElementById('tableBody');
+    const month = document.getElementById('monthPicker').value;
+    const search = document.getElementById('searchInput').value.toLowerCase();
+    
+    let filtered = records.filter(r => {
+        const rMonth = r.from ? r.from.substring(0, 7) : '';
+        if (month && rMonth !== month) return false;
+        if (activeFilter !== 'All' && r.type !== activeFilter) return false;
+        if (search && !r.name.toLowerCase().includes(search) && !(r.section || '').toLowerCase().includes(search)) return false;
+        return true;
+    });
+
+    // Stats
+    document.getElementById('statTotal').textContent = filtered.length;
+    document.getElementById('statFull').textContent = filtered.filter(r => r.type === 'Full Day').length;
+    document.getElementById('statHalf').textContent = filtered.filter(r => r.type === 'Half Day').length;
+
+    if (filtered.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding:30px; color:var(--text-muted);">No records found.</td></tr>';
+        return;
+    }
+
+    // Sort
+    if (isDescending) {
+        filtered.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+    } else {
+        filtered.sort((a, b) => (a.createdAt || 0) - (b.createdAt || 0));
+    }
+
+    tbody.innerHTML = filtered.map((r, i) => `
+        <tr>
+            <td><strong>${i + 1}</strong></td>
+            <td data-label="Name"><strong>${escapeHtml(r.name)}</strong></td>
+            <td data-label="Section">${escapeHtml(r.section || '-')}</td>
+            <td data-label="Type"><span class="badge ${r.type === 'Full Day' ? 'badge-full' : 'badge-half'}">${r.type}</span></td>
+            <td data-label="From">${formatDisplay(r.from)}</td>
+            <td data-label="To">${formatDisplay(r.to)}</td>
+            <td data-label="Submitted">${formatDisplay(r.submitted)}</td>
+            <td style="text-align:right;">
+                <button class="action-btn btn-edit" onclick="editEntry('${r.id}')">Edit</button>
+                <button class="action-btn btn-del" onclick="deleteEntry('${r.id}')">Del</button>
+            </td>
+        </tr>
+    `).join('');
+}
+
+function setFilter(type) {
+    activeFilter = type;
+    ['filterAll', 'filterFull', 'filterHalf'].forEach(id => {
+        const btn = document.getElementById(id);
+        btn.style.background = 'var(--glass-input-bg)';
+        btn.style.color = 'var(--text-main)';
+        btn.style.borderColor = 'var(--border)';
+    });
+    const activeBtn = document.getElementById('filter' + type.replace(' ', ''));
+    activeBtn.style.background = 'var(--primary)';
+    activeBtn.style.color = 'white';
+    activeBtn.style.borderColor = 'var(--primary)';
+    renderTable();
+}
+
+function toggleSort() {
+    isDescending = !isDescending;
+    document.getElementById('sortBtn').textContent = isDescending ? 'Sort: New ↓' : 'Sort: Old ↑';
+    renderTable();
+}
+
+// ==================== EXPORT ====================
+function downloadCSV() {
+    if (records.length === 0) {
+        showToast('No data to export.');
+        return;
+    }
+    
+    let csv = 'S.No,Name,Section,Type,From,To,Submitted\n';
+    const sorted = [...records].sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+    
+    sorted.forEach((r, i) => {
+        csv += `"${i + 1}","${r.name}","${r.section || ''}","${r.type}","${r.from}","${r.to}","${r.submitted}"\n`;
+    });
+
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `Leave_Report_${currentUser.username}_${new Date().toISOString().split('T')[0]}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('CSV downloaded!');
+}
+
+// ==================== UTILITIES ====================
+function parseDate(str) {
+    if (!str) return null;
+    const parts = str.split('-');
+    if (parts.length !== 3) return null;
+    const [d, m, y] = parts;
+    if (!d || !m || !y || y.length !== 4) return null;
+    return `${y}-${m}-${d}`;
+}
+
+function reverseDate(iso) {
+    if (!iso) return '';
+    const [y, m, d] = iso.split('-');
+    return `${d}-${m}-${y}`;
+}
+
+function formatDateInput(date) {
+    const d = String(date.getDate()).padStart(2, '0');
+    const m = String(date.getMonth() + 1).padStart(2, '0');
+    const y = date.getFullYear();
+    return `${d}-${m}-${y}`;
+}
+
+function formatDisplay(iso) {
+    if (!iso) return '-';
+    const date = new Date(iso);
+    return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+}
+
+function autoFormatDate(input) {
+    let val = input.value.replace(/\D/g, '');
+    if (val.length >= 2) val = val.slice(0, 2) + '-' + val.slice(2);
+    if (val.length >= 5) val = val.slice(0, 5) + '-' + val.slice(5, 9);
+    input.value = val;
+}
+
+function escapeHtml(text) {
+    if (!text) return '';
+    return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+function showToast(msg) {
+    const toast = document.getElementById('toast');
+    toast.textContent = msg;
+    toast.style.visibility = 'visible';
+    setTimeout(() => toast.style.visibility = 'hidden', 2500);
+}
+
+// ==================== CUSTOMIZATION ====================
+function loadSettings() {
+    const bg = localStorage.getItem('lms_bg');
+    if (bg) applyBg(bg);
+
+    if (localStorage.getItem('lms_popMode') === 'true') {
+        document.body.classList.add('ultra-transparent');
+        const el = document.getElementById('popModeToggle');
+        if (el) el.checked = true;
+    }
+    if (localStorage.getItem('lms_lightText') === 'true') {
+        document.body.classList.add('text-light');
+        const el = document.getElementById('lightTextToggle');
+        if (el) el.checked = true;
+    }
+    if (localStorage.getItem('lms_darkMode') === 'true') {
+        document.body.classList.add('dark-mode');
+    }
+}
+
+function toggleCustomizer() {
+    document.getElementById('customizerPanel').classList.toggle('show');
+}
+
+function toggleUltraTransparent() {
+    const is = document.getElementById('popModeToggle').checked;
+    document.body.classList.toggle('ultra-transparent', is);
+    localStorage.setItem('lms_popMode', is);
+}
+
+function toggleLightText() {
+    const is = document.getElementById('lightTextToggle').checked;
+    document.body.classList.toggle('text-light', is);
+    localStorage.setItem('lms_lightText', is);
+}
+
+function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+    localStorage.setItem('lms_darkMode', document.body.classList.contains('dark-mode'));
+}
+
+function applyBg(style) {
+    const layer = document.getElementById('wallpaper-layer');
+    if (style.startsWith('http') || style.startsWith('data:')) {
+        layer.style.background = `url('${style}') center/cover no-repeat`;
+    } else {
+        layer.style.background = style;
+    }
+}
+
+function handleBgFile(input) {
+    const file = input.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+        localStorage.setItem('lms_bg', e.target.result);
+        applyBg(e.target.result);
+        toggleCustomizer();
+    };
+    reader.readAsDataURL(file);
+}
+
+function applyBgUrl() {
+    const url = document.getElementById('bgUrlInput').value.trim();
+    if (url) {
+        localStorage.setItem('lms_bg', url);
+        applyBg(url);
+    }
+}
+
+function setPreset(gradient) {
+    localStorage.setItem('lms_bg', gradient);
+    applyBg(gradient);
+}
+
+function resetBg() {
+    localStorage.removeItem('lms_bg');
+    document.getElementById('wallpaper-layer').style.background = '#f3f4f6';
+    toggleCustomizer();
+}
+
+// Keyboard shortcut
+document.addEventListener('keydown', e => {
+    if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA' || document.activeElement.tagName === 'SELECT') return;
+    if ((e.ctrlKey || e.metaKey) && e.key === 'n') {
+        e.preventDefault();
+        if (currentUser) openModal();
+    }
+});
+
+// Close modal on outside click
+window.onclick = e => {
+    if (e.target === document.getElementById('entryModal')) closeModal();
+};
 </script>
 </body>
 </html>
