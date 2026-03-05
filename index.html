@@ -16,6 +16,8 @@
         --glass-blur: 12px;
         --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
         --radius: 12px;
+        --danger: #ef4444;
+        --success: #10b981;
     }
 
     body.ultra-transparent {
@@ -71,19 +73,8 @@
         transition: color 0.3s ease;
     }
 
-    .container { 
-        max-width: 1200px; 
-        margin: 20px auto; 
-        padding: 25px; 
-        background: var(--glass-bg); 
-        backdrop-filter: blur(var(--glass-blur)); 
-        border: 1px solid var(--border); 
-        box-shadow: var(--shadow);
-        border-radius: var(--radius);
-    }
-
-    /* LOGIN PANEL - Inside UI */
-    .login-panel {
+    /* ========== LOGIN PAGE ========== */
+    .login-page {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -92,34 +83,44 @@
     }
     .login-box {
         width: 100%;
-        max-width: 380px;
-        padding: 35px;
+        max-width: 400px;
+        padding: 40px;
         background: var(--glass-bg);
         backdrop-filter: blur(var(--glass-blur));
+        -webkit-backdrop-filter: blur(var(--glass-blur));
         border: 1px solid var(--border);
         border-radius: var(--radius);
         box-shadow: var(--shadow);
         text-align: center;
     }
-    .login-box h2 { color: var(--primary); margin-bottom: 5px; }
-    .login-box .subtitle { color: var(--text-muted); margin-bottom: 25px; font-size: 14px; }
+    .login-box h1 { 
+        font-size: 28px; 
+        margin-bottom: 5px; 
+        color: var(--primary); 
+    }
+    .login-box .subtitle { 
+        color: var(--text-muted); 
+        margin-bottom: 30px; 
+        font-size: 14px; 
+    }
 
     input, select {
         width: 100%;
-        padding: 12px;
+        padding: 14px;
         border: 1px solid var(--border);
         border-radius: 8px;
-        font-size: 14px;
+        font-size: 15px;
         background: var(--glass-input-bg);
         backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
         color: var(--text-main);
         transition: all 0.2s;
-        margin-bottom: 12px;
+        margin-bottom: 14px;
     }
     input:focus, select:focus { 
-        background: rgba(255,255,255,0.5); 
+        background: rgba(255,255,255,0.6); 
         border-color: var(--primary); 
-        box-shadow: 0 0 10px rgba(79, 70, 229, 0.2); 
+        box-shadow: 0 0 12px rgba(79, 70, 229, 0.25); 
     }
     input::placeholder { color: var(--text-muted); }
 
@@ -127,19 +128,21 @@
         background: var(--primary); 
         color: white; 
         border: none; 
-        padding: 12px 24px; 
+        padding: 14px 24px; 
         border-radius: 8px; 
+        font-size: 15px;
         font-weight: 600; 
         cursor: pointer; 
         display: inline-flex; 
         align-items: center; 
         justify-content: center; 
         gap: 8px; 
-        box-shadow: 0 4px 6px rgba(79, 70, 229, 0.2); 
+        box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25); 
         transition: all 0.2s; 
         width: 100%;
     }
     .btn-primary:hover { background: var(--primary-hover); transform: translateY(-2px); }
+    .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 
     .btn-tool { 
         background: var(--glass-input-bg); 
@@ -157,7 +160,22 @@
     }
     .btn-tool:hover { background: rgba(255,255,255,0.3); }
 
-    /* HEADER */
+    .error-text { color: var(--danger); font-size: 13px; margin-top: 10px; }
+    .hint-text { color: var(--text-muted); font-size: 12px; margin-top: 20px; line-height: 1.6; }
+
+    /* ========== MAIN APP ========== */
+    .container { 
+        max-width: 1200px; 
+        margin: 20px auto; 
+        padding: 25px; 
+        background: var(--glass-bg); 
+        backdrop-filter: blur(var(--glass-blur)); 
+        -webkit-backdrop-filter: blur(var(--glass-blur));
+        border: 1px solid var(--border); 
+        box-shadow: var(--shadow);
+        border-radius: var(--radius);
+    }
+
     .header { 
         display: flex; 
         justify-content: space-between; 
@@ -176,27 +194,28 @@
         gap: 10px; 
     }
     .user-badge {
-        background: rgba(79, 70, 229, 0.1);
+        background: rgba(79, 70, 229, 0.15);
         color: var(--primary);
-        padding: 4px 12px;
+        padding: 6px 16px;
         border-radius: 20px;
-        font-size: 12px;
+        font-size: 13px;
         font-weight: 600;
     }
+
     .header-controls { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
 
     /* STATS */
     .stats-row { display: flex; gap: 15px; margin-bottom: 20px; }
     .stat-card { 
         flex: 1; 
-        padding: 18px; 
+        padding: 20px; 
         border-radius: 10px; 
         text-align: center; 
         background: var(--glass-input-bg); 
         border: 1px solid var(--border); 
     }
-    .stat-card h4 { margin: 0 0 5px 0; font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
-    .stat-card .value { font-size: 32px; font-weight: 700; color: var(--primary); }
+    .stat-card h4 { margin: 0 0 8px 0; font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+    .stat-card .value { font-size: 36px; font-weight: 700; color: var(--primary); }
     body.text-light .stat-card .value { color: #a5b4fc; }
 
     /* TABLE */
@@ -218,12 +237,12 @@
     tbody td { padding: 12px; border-bottom: 1px solid var(--border); vertical-align: middle; }
     tbody tr:hover { background: var(--glass-input-bg); }
 
-    .badge { padding: 5px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+    .badge { padding: 5px 14px; border-radius: 20px; font-size: 11px; font-weight: 700; }
     .badge-full { background: rgba(209, 250, 229, 0.7); color: #065f46; }
     .badge-half { background: rgba(255, 237, 213, 0.7); color: #9a3412; }
 
     .action-btn { 
-        padding: 6px 12px; 
+        padding: 7px 14px; 
         font-size: 11px; 
         margin-right: 5px; 
         border-radius: 5px; 
@@ -256,29 +275,38 @@
         animation: slideIn 0.3s ease-out; 
         background: var(--glass-bg); 
         backdrop-filter: blur(20px); 
+        -webkit-backdrop-filter: blur(20px);
         border: 1px solid var(--border); 
     }
     @keyframes slideIn { from { transform: translateY(-30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
     
     .modal-header { 
-        padding: 15px 20px; 
-        background: rgba(79, 70, 229, 0.85); 
+        padding: 16px 20px; 
+        background: rgba(79, 70, 229, 0.9); 
         color: white; 
         display: flex; 
         justify-content: space-between; 
         align-items: center; 
     }
-    .close-modal { background: none; border: none; color: white; font-size: 24px; cursor: pointer; }
+    .close-modal { background: none; border: none; color: white; font-size: 26px; cursor: pointer; line-height: 1; }
     .modal-body { padding: 20px; }
     .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
     .form-group { display: flex; flex-direction: column; gap: 5px; }
     label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
     .modal-footer { 
-        padding: 15px 20px; 
+        padding: 16px 20px; 
         border-top: 1px solid var(--border); 
         display: flex; 
         justify-content: flex-end; 
         gap: 10px; 
+    }
+
+    .date-hint {
+        font-size: 10px;
+        color: var(--primary);
+        margin-top: -10px;
+        margin-bottom: 10px;
+        font-weight: 500;
     }
 
     /* CUSTOMIZER */
@@ -292,7 +320,7 @@
 
     .customizer-panel {
         position: fixed; bottom: 80px; right: 20px; width: 300px; padding: 20px; z-index: 1500; display: none;
-        background: var(--glass-bg); backdrop-filter: blur(20px); border: 1px solid var(--border); border-radius: 12px;
+        background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--border); border-radius: 12px;
     }
     .customizer-panel.show { display: block; }
     .customizer-section { margin-bottom: 18px; padding-bottom: 15px; border-bottom: 1px solid var(--border); }
@@ -311,12 +339,10 @@
     .preset-box { width: 100%; height: 38px; border-radius: 6px; cursor: pointer; border: 2px solid transparent; transition: transform 0.15s; }
     .preset-box:hover { transform: scale(1.1); }
 
-    .error-text { color: #ef4444; font-size: 12px; margin-top: 8px; }
-    .success-text { color: #10b981; font-size: 12px; margin-top: 8px; }
-
     /* Responsive */
     @media (max-width: 768px) {
         .container { margin: 10px; padding: 15px; }
+        .login-box { padding: 30px 25px; }
         .stats-row { flex-direction: column; }
         .form-grid { grid-template-columns: 1fr; }
         
@@ -345,34 +371,35 @@
 
 <div id="wallpaper-layer"></div>
 
-<!-- LOGIN PANEL -->
-<div id="loginPanel" class="login-panel">
+<!-- ========== LOGIN PAGE ========== -->
+<div id="loginPage" class="login-page">
     <div class="login-box">
-        <h2>📅 Leave Management</h2>
-        <p class="subtitle">Enter your credentials to continue</p>
+        <h1>📅 Leave Management</h1>
+        <p class="subtitle">Sign in to access your records</p>
         
-        <input type="text" id="loginUsername" placeholder="Username (e.g., john_doe)" maxlength="30">
-        <input type="password" id="loginPin" placeholder="4-digit PIN" maxlength="4" pattern="[0-9]*" inputmode="numeric">
+        <input type="text" id="loginUsername" placeholder="Username (e.g., sreejith)" maxlength="20" autocomplete="username">
+        <input type="password" id="loginPin" placeholder="4-digit PIN (e.g., 1234)" maxlength="4" pattern="[0-9]*" inputmode="numeric" autocomplete="current-password">
         
         <p id="loginError" class="error-text" style="display:none;"></p>
         
-        <button class="btn-primary" onclick="handleLogin()">
-            🔐 Enter
+        <button id="loginBtn" class="btn-primary" onclick="handleLogin()">
+            🔐 Sign In
         </button>
         
-        <p style="margin-top: 18px; font-size: 12px; color: var(--text-muted);">
-            First time? Just enter a new username & PIN to create an account.<br>
-            Your data stays on this device only.
+        <p class="hint-text">
+            <strong>New user?</strong> Enter a new username & PIN to create account.<br>
+            <strong>Returning?</strong> Use your existing credentials.<br><br>
+            ⚠️ Data is stored on this device only.
         </p>
     </div>
 </div>
 
-<!-- MAIN APP -->
-<div id="appContainer" class="container" style="display:none;">
+<!-- ========== MAIN APP ========== -->
+<div id="appPage" class="container" style="display:none;">
     <div class="header">
         <div class="main-title">
             📅 Leave Management
-            <span class="user-badge" id="userBadge"></span>
+            <span class="user-badge" id="userBadge">👤 User</span>
         </div>
         
         <div class="header-controls">
@@ -389,7 +416,7 @@
 
             <button class="btn-tool" id="sortBtn" onclick="toggleSort()">Sort: New ↓</button>
             <button class="btn-tool" onclick="toggleDarkMode()">🌓</button>
-            <button class="btn-tool" onclick="handleLogout()" style="color:#ef4444; border-color:#ef4444;">🚪 Logout</button>
+            <button class="btn-tool" onclick="handleLogout()" style="color:var(--danger); border-color:var(--danger);">🚪 Logout</button>
         </div>
     </div>
 
@@ -438,7 +465,7 @@
                 </tr>
             </thead>
             <tbody id="tableBody">
-                <tr><td colspan="8" style="text-align:center; padding:30px; color:var(--text-muted);">No records yet. Click "+ New Entry" to add.</td></tr>
+                <tr><td colspan="8" style="text-align:center; padding:30px; color:var(--text-muted);">No records yet.</td></tr>
             </tbody>
         </table>
     </div>
@@ -473,10 +500,10 @@
             <div class="preset-box" style="background: linear-gradient(to top, #09203f 0%, #537895 100%);" onclick="setPreset('linear-gradient(to top, #09203f 0%, #537895 100%)')"></div>
         </div>
     </div>
-    <button class="btn-tool" style="width:100%; justify-content:center; color:#ef4444; border-color:#ef4444;" onclick="resetBg()">Reset Background</button>
+    <button class="btn-tool" style="width:100%; justify-content:center; color:var(--danger); border-color:var(--danger);" onclick="resetBg()">Reset Background</button>
 </div>
 
-<!-- MODAL -->
+<!-- ENTRY MODAL -->
 <div id="entryModal" class="modal">
     <div class="modal-content">
         <div class="modal-header">
@@ -487,7 +514,7 @@
             <div class="form-grid">
                 <div class="form-group">
                     <label>Employee Name *</label>
-                    <input type="text" id="entryName" placeholder="Name">
+                    <input type="text" id="entryName" placeholder="Employee Name">
                 </div>
                 <div class="form-group">
                     <label>Section / Dept</label>
@@ -502,15 +529,18 @@
                 </div>
                 <div class="form-group">
                     <label>Date Submitted</label>
-                    <input type="text" id="entrySubmitted" placeholder="DD-MM-YYYY" maxlength="10" oninput="autoFormatDate(this)">
+                    <input type="text" id="entrySubmitted" placeholder="Type day, e.g., 06" maxlength="10" oninput="autoFillDate(this)">
+                    <div class="date-hint" id="submittedHint">Type day (1-31) → auto-fills month & year</div>
                 </div>
                 <div class="form-group">
                     <label>From Date *</label>
-                    <input type="text" id="entryFrom" placeholder="DD-MM-YYYY" maxlength="10" oninput="autoFormatDate(this)">
+                    <input type="text" id="entryFrom" placeholder="Type day, e.g., 06" maxlength="10" oninput="autoFillDate(this)">
+                    <div class="date-hint" id="fromHint">Type day (1-31) → auto-fills month & year</div>
                 </div>
                 <div class="form-group">
                     <label>To Date *</label>
-                    <input type="text" id="entryTo" placeholder="DD-MM-YYYY" maxlength="10" oninput="autoFormatDate(this)">
+                    <input type="text" id="entryTo" placeholder="Type day, e.g., 06" maxlength="10" oninput="autoFillDate(this)">
+                    <div class="date-hint" id="toHint">Type day (1-31) → auto-fills month & year</div>
                 </div>
             </div>
         </div>
@@ -527,18 +557,33 @@
 <div id="toast" style="visibility:hidden; position:fixed; bottom:30px; left:50%; transform:translateX(-50%); background:#333; color:#fff; padding:12px 24px; border-radius:8px; z-index:9999; font-size:14px;"></div>
 
 <script>
-// ==================== STATE ====================
+// ==================== GLOBAL STATE ====================
 let currentUser = null;
 let records = [];
 let editingId = null;
 let isDescending = true;
 let activeFilter = 'All';
+let currentMonth = '';
+let currentYear = '';
 
-// ==================== INIT ====================
+// ==================== INITIALIZATION ====================
 document.addEventListener('DOMContentLoaded', () => {
     loadSettings();
+    setCurrentDateHints();
     checkSession();
 });
+
+function setCurrentDateHints() {
+    const now = new Date();
+    currentMonth = String(now.getMonth() + 1).padStart(2, '0');
+    currentYear = now.getFullYear();
+    
+    const monthName = now.toLocaleDateString('en-US', { month: 'short' });
+    const hint = `Type day → auto: ${monthName} ${currentYear}`;
+    document.getElementById('submittedHint').textContent = hint;
+    document.getElementById('fromHint').textContent = hint;
+    document.getElementById('toHint').textContent = hint;
+}
 
 function checkSession() {
     const session = localStorage.getItem('lms_session');
@@ -553,14 +598,16 @@ function handleLogin() {
     const username = document.getElementById('loginUsername').value.trim().toLowerCase();
     const pin = document.getElementById('loginPin').value.trim();
     const errorEl = document.getElementById('loginError');
+    const loginBtn = document.getElementById('loginBtn');
 
+    // Validation
     if (!username || username.length < 3) {
         errorEl.textContent = 'Username must be at least 3 characters.';
         errorEl.style.display = 'block';
         return;
     }
     if (!/^[a-z0-9_]+$/.test(username)) {
-        errorEl.textContent = 'Username can only have letters, numbers, and underscore.';
+        errorEl.textContent = 'Username: only letters, numbers, underscore.';
         errorEl.style.display = 'block';
         return;
     }
@@ -570,7 +617,7 @@ function handleLogin() {
         return;
     }
 
-    // Check existing user
+    // Check stored users
     const users = JSON.parse(localStorage.getItem('lms_users') || '{}');
     
     if (users[username]) {
@@ -594,29 +641,32 @@ function handleLogin() {
 }
 
 function handleLogout() {
-    if (confirm('Logout? Your data will remain saved.')) {
+    if (confirm('Logout? Your data is saved on this device.')) {
         localStorage.removeItem('lms_session');
         currentUser = null;
-        document.getElementById('appContainer').style.display = 'none';
-        document.getElementById('loginPanel').style.display = 'flex';
+        records = [];
+        document.getElementById('appPage').style.display = 'none';
+        document.getElementById('loginPage').style.display = 'flex';
         document.getElementById('loginUsername').value = '';
         document.getElementById('loginPin').value = '';
+        document.getElementById('loginError').style.display = 'none';
     }
 }
 
 function showApp() {
-    document.getElementById('loginPanel').style.display = 'none';
-    document.getElementById('appContainer').style.display = 'block';
+    document.getElementById('loginPage').style.display = 'none';
+    document.getElementById('appPage').style.display = 'block';
     document.getElementById('userBadge').textContent = '👤 ' + currentUser.username;
     
     // Set default month
     const now = new Date();
     document.getElementById('monthPicker').value = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
-    document.getElementById('entrySubmitted').value = formatDateInput(now);
     
-    // Load last submitted date
-    const lastDate = localStorage.getItem(`lms_lastDate_${currentUser.username}`);
-    if (lastDate) document.getElementById('entrySubmitted').value = lastDate;
+    // Load sticky submitted date
+    const lastDate = localStorage.getItem(`lms_submittedDate_${currentUser.username}`);
+    if (lastDate) {
+        document.getElementById('entrySubmitted').value = lastDate;
+    }
     
     loadRecords();
     renderTable();
@@ -633,7 +683,48 @@ function saveRecords() {
     localStorage.setItem(key, JSON.stringify(records));
 }
 
-// ==================== CRUD ====================
+// ==================== DATE HANDLING ====================
+function autoFillDate(input) {
+    let val = input.value.replace(/\D/g, ''); // Remove non-digits
+    
+    // Limit to 2 digits for day
+    if (val.length > 2) val = val.slice(0, 2);
+    
+    // Validate day (1-31)
+    if (val.length === 2) {
+        const day = parseInt(val);
+        if (day < 1) val = '01';
+        if (day > 31) val = '31';
+        val = String(val).padStart(2, '0');
+        
+        // Auto-fill complete date: DD-MM-YYYY
+        input.value = `${val}-${currentMonth}-${currentYear}`;
+    } else {
+        input.value = val;
+    }
+}
+
+function parseDate(dateStr) {
+    if (!dateStr) return null;
+    
+    // Format: DD-MM-YYYY
+    if (dateStr.includes('-')) {
+        const parts = dateStr.split('-');
+        if (parts.length === 3) {
+            const [d, m, y] = parts;
+            return `${y}-${m}-${d}`;
+        }
+    }
+    return null;
+}
+
+function reverseDate(iso) {
+    if (!iso) return '';
+    const [y, m, d] = iso.split('-');
+    return `${d}-${m}-${y}`;
+}
+
+// ==================== CRUD OPERATIONS ====================
 function openModal(isEdit = false) {
     const modal = document.getElementById('entryModal');
     const title = document.getElementById('modalTitle');
@@ -646,8 +737,13 @@ function openModal(isEdit = false) {
         document.getElementById('entryFrom').value = '';
         document.getElementById('entryTo').value = '';
         
-        const lastDate = localStorage.getItem(`lms_lastDate_${currentUser.username}`);
-        document.getElementById('entrySubmitted').value = lastDate || formatDateInput(new Date());
+        // Keep submitted date sticky
+        const lastSubmitted = localStorage.getItem(`lms_submittedDate_${currentUser.username}`);
+        if (lastSubmitted) {
+            document.getElementById('entrySubmitted').value = lastSubmitted;
+        } else {
+            document.getElementById('entrySubmitted').value = '';
+        }
         
         title.textContent = 'Add New Entry';
         btnText.textContent = '💾 Save';
@@ -670,18 +766,27 @@ function saveEntry() {
     const name = document.getElementById('entryName').value.trim();
     const section = document.getElementById('entrySection').value.trim();
     const type = document.getElementById('entryType').value;
-    const from = document.getElementById('entryFrom').value.trim();
-    const to = document.getElementById('entryTo').value.trim();
-    const submitted = document.getElementById('entrySubmitted').value.trim();
+    const submittedStr = document.getElementById('entrySubmitted').value.trim();
+    const fromStr = document.getElementById('entryFrom').value.trim();
+    const toStr = document.getElementById('entryTo').value.trim();
 
-    if (!name || !from || !to) {
-        showToast('Please fill Name, From Date, and To Date.');
+    // Validation
+    if (!name) {
+        showToast('Please enter Employee Name.');
+        return;
+    }
+    if (!fromStr) {
+        showToast('Please enter From Date.');
+        return;
+    }
+    if (!toStr) {
+        showToast('Please enter To Date.');
         return;
     }
 
-    const fromISO = parseDate(from);
-    const toISO = parseDate(to);
-    const submittedISO = parseDate(submitted);
+    const fromISO = parseDate(fromStr);
+    const toISO = parseDate(toStr);
+    const submittedISO = submittedStr ? parseDate(submittedStr) : new Date().toISOString().split('T')[0];
 
     if (!fromISO || !toISO) {
         showToast('Invalid date format. Use DD-MM-YYYY.');
@@ -693,9 +798,9 @@ function saveEntry() {
         return;
     }
 
-    // Save last submitted date
-    if (submitted) {
-        localStorage.setItem(`lms_lastDate_${currentUser.username}`, submitted);
+    // Save submitted date as sticky
+    if (submittedStr) {
+        localStorage.setItem(`lms_submittedDate_${currentUser.username}`, submittedStr);
     }
 
     const entry = {
@@ -705,8 +810,8 @@ function saveEntry() {
         type,
         from: fromISO,
         to: toISO,
-        submitted: submittedISO || new Date().toISOString().split('T')[0],
-        createdAt: editingId ? records.find(r => r.id === editingId)?.createdAt : Date.now()
+        submitted: submittedISO,
+        createdAt: editingId ? (records.find(r => r.id === editingId)?.createdAt || Date.now()) : Date.now()
     };
 
     if (editingId) {
@@ -746,7 +851,7 @@ function deleteEntry(id) {
     showToast('Deleted.');
 }
 
-// ==================== RENDER ====================
+// ==================== RENDER TABLE ====================
 function renderTable() {
     const tbody = document.getElementById('tableBody');
     const month = document.getElementById('monthPicker').value;
@@ -766,7 +871,7 @@ function renderTable() {
     document.getElementById('statHalf').textContent = filtered.filter(r => r.type === 'Half Day').length;
 
     if (filtered.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding:30px; color:var(--text-muted);">No records found.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding:30px; color:var(--text-muted);">No records found. Click "+ New Entry" to add.</td></tr>';
         return;
     }
 
@@ -840,39 +945,10 @@ function downloadCSV() {
 }
 
 // ==================== UTILITIES ====================
-function parseDate(str) {
-    if (!str) return null;
-    const parts = str.split('-');
-    if (parts.length !== 3) return null;
-    const [d, m, y] = parts;
-    if (!d || !m || !y || y.length !== 4) return null;
-    return `${y}-${m}-${d}`;
-}
-
-function reverseDate(iso) {
-    if (!iso) return '';
-    const [y, m, d] = iso.split('-');
-    return `${d}-${m}-${y}`;
-}
-
-function formatDateInput(date) {
-    const d = String(date.getDate()).padStart(2, '0');
-    const m = String(date.getMonth() + 1).padStart(2, '0');
-    const y = date.getFullYear();
-    return `${d}-${m}-${y}`;
-}
-
 function formatDisplay(iso) {
     if (!iso) return '-';
-    const date = new Date(iso);
+    const date = new Date(iso + 'T00:00:00');
     return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
-}
-
-function autoFormatDate(input) {
-    let val = input.value.replace(/\D/g, '');
-    if (val.length >= 2) val = val.slice(0, 2) + '-' + val.slice(2);
-    if (val.length >= 5) val = val.slice(0, 5) + '-' + val.slice(5, 9);
-    input.value = val;
 }
 
 function escapeHtml(text) {
@@ -930,6 +1006,8 @@ function toggleDarkMode() {
 
 function applyBg(style) {
     const layer = document.getElementById('wallpaper-layer');
+    if (!layer) return;
+    
     if (style.startsWith('http') || style.startsWith('data:')) {
         layer.style.background = `url('${style}') center/cover no-repeat`;
     } else {
@@ -964,11 +1042,15 @@ function setPreset(gradient) {
 
 function resetBg() {
     localStorage.removeItem('lms_bg');
-    document.getElementById('wallpaper-layer').style.background = '#f3f4f6';
+    const layer = document.getElementById('wallpaper-layer');
+    if (layer) {
+        layer.style.background = '#f3f4f6';
+        layer.style.backgroundImage = 'none';
+    }
     toggleCustomizer();
 }
 
-// Keyboard shortcut
+// Keyboard shortcut: Ctrl+N = New Entry
 document.addEventListener('keydown', e => {
     if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA' || document.activeElement.tagName === 'SELECT') return;
     if ((e.ctrlKey || e.metaKey) && e.key === 'n') {
